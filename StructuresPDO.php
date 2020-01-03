@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
 </head>
 <body>
+
 <?php
 $server = "localhost";
 $user = "root";
