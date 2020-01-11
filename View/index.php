@@ -3,10 +3,7 @@
 <html lang="fr">
 
     <head>
-        <link rel="stylesheet" href="../View/style.css">
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Projet Gestion des Secteurs et Structures</title>
     </head>
@@ -15,8 +12,9 @@
         <!-- Ajout du menu de navigation -->
         <?php include 'menu.php'; ?>
 
-        <div class="content">
-            <h3>Accueil du site :</h3>
+        <!-- Contenu de la page -->
+        <div style="padding:50px;">
+            <h3>Accueil du site de Gestion :</h3>
             Nunc vero inanes flatus quorundam vile esse quicquid extra urbis pomerium nascitur aestimant praeter orbos et caelibes, nec credi potest qua obsequiorum diversitate coluntur homines sine liberis Romae.
             Sed fruatur sane hoc solacio atque hanc insignem ignominiam, quoniam uni praeter se inusta sit, putet esse leviorem, dum modo, cuius exemplo se consolatur, eius exitum expectet, praesertim cum in Albucio nec Pisonis libidines nec audacia Gabini fuerit ac tamen hac una plaga conciderit, ignominia senatus.
         </div>

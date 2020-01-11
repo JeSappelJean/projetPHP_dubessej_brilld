@@ -1,3 +1,5 @@
+-- COPYRIGHT MATHIEU MULOT
+
 DROP TABLE IF EXISTS secteurs_structures;
 DROP TABLE IF EXISTS secteur;
 DROP TABLE IF EXISTS structure;

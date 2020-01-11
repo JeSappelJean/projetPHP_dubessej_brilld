@@ -1,32 +1,37 @@
 <?php
-include_once ("../Model/DAO.php");
+
+// Appel des class utiles
 include_once ("../Model/DAO.php");
 
+// CONTROLE : MAJ d'un secteur
 if (isset($_POST['submit'])) {
     if (isset($_POST['libelle'])) {
         $libelle = $_POST['libelle'];
-    }
-    if (isset($_POST['libelle'])) {
+
         try {
-            $dao->updateSecteur(intval($_POST['idSecteur']),$libelle);
-            $ok_message = "Votre secteur à bien été mis à jour";
+            $dao->updateSecteur(intval($_POST['IDSecteur']),$libelle);
+            $confirmation_msg = "CONFIRMATION : Réussite de la mise à jour !";
         } catch (PDOException $PDOException) {
-            $error_message = "Erreur lors de la mise à jour !";
+            $erreur_msg = "ERREUR : Echec de la mise à jour !";
         }
     }
 }
 
+// CONTROLE : Suppression d'un secteur
 if (isset($_POST['submitDelete'])){
     try{
-        $dao->deleteSecteur(intval($_POST['idSecteur']));
-        $ok_message = "Votre secteur à bien été suprimmé";
+        $dao->deleteSecteur(intval($_POST['IDSecteur']));
+        $confirmation_msg = "CONFIRMATION : Le secteur a été suprimmé !";
     }
     catch (PDOException $exception){
-
-        $error_message = "Erreur lors de la supression !";
+        $erreur_msg = "ERREUR : Echec de la supression !";
     }
 }
 
+// Récupération de la liste des secteurs
 $listeSecteurs = $dao->getSecteurs();
 
+// Redirection vers l'affichage
 include_once("../View/liste_secteurs.view.php");
+
+?>

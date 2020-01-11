@@ -1,43 +1,36 @@
 <!doctype html>
-<html lang="fr">
-<head>
-    <link rel="stylesheet" href="../View/style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Projet Gestion des Secteurs et Structures</title>
-</head>
-<body>
 
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Projet Gestion des Secteurs et Structures</title>
+    </head>
+
+    <body>
     <!-- Ajout du menu de navigation -->
     <?php include 'menu.php'; ?>
 
-
-
-<div class="moove-right">
-    <div class="content">
+    <!-- Contenu de la page -->
+    <div style="padding:50px;">
         <form class="classic-form" method="post" action="../Controler/create_secteurs.controler.php">
             <h2>Créer un secteur</h2>
 
-            <div class="champ">
+            <div>
                 <label for="libelle">Nom du secteur : </label>
                 <input  name="libelle" id="libelle" type="text">
-
             </div>
-            <input name="submit"  type="submit" required>
+
+            <input name="submit" type="submit" required>
             <?php if (isset($error_message)) {
                 echo '<div class="error_message">'. $error_message . '</div>';
             } else if (isset($ok_message)) {
                 echo '<div class="ok_message">'. $ok_message .'</div>';
             }?>
         </form>
-
     </div>
 
-
-</div>
     </body>
 
     <!-- Scripts Bootstrap -->

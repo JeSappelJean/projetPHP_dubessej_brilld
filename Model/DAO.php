@@ -1,17 +1,18 @@
 <?php
+
+//Appel des class utiles
 require_once ("secteur.php");
 require_once ("structure.php");
 require_once ("secteurs_structures.php");
 
-
 $dao = new DAO();
 
 class DAO{
+
+    // Déclaration des attributs
     private $pdo;
 
-    /**
-     * DAO constructor.
-     */
+    // Constructeur
     public function __construct()
     {
         try{
@@ -23,64 +24,79 @@ class DAO{
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch (PDOException $exception){
-            die("erreur de connexion:".$exception->getMessage());
+            die("Erreur de connexion:".$exception->getMessage());
         }
     }
 
+
+    /* ################# SECTEURS #################*/
+    // FONCTION : Récupération de tous les secteurs
     public function getSecteurs() : array{
-        $req = "SELECT * FROM secteur" ;
-        $std = ($this->pdo)->query($req);
-        $res = $std->fetchAll(PDO::FETCH_CLASS,"Secteur");
 
-        if(count($res)>0){
-            return $res;
+        $requete = "SELECT * FROM secteur" ;
+        $std = ($this->pdo)->query($requete);
+        $resultat = $std->fetchAll(PDO::FETCH_CLASS,"Secteur");
 
+        if(count($resultat)>0){
+            return $resultat;
         }
         else{
             return array();
         }
-
     }
 
-    public function getSecteurById($id) : Secteur{
-        $req = "SELECT * FROM secteur WHERE id = '$id'";//sélectonne un secteur correspond à l'identification id rentrer en paramètre
-        $lignereq =($this->pdo)->query($req);
-        if($lignereq){
-            $result =$lignereq->fetchAll(PDO::FETCH_CLASS,'Secteur');
 
-            if(count($result)>0){
-                return $result[0];
-            }
-            else{
-                return new Secteur();
-            }
-        }else{
-            return new Secteur();//on renvoie un nouveaux objet secteur vide si la recherche dans la base de donnée à échouer
+    // FONCTION : MAJ d'un secteur
+    function updateSecteur($id,$libelle){
+        $requete = "UPDATE secteur SET libelle = '$libelle' WHERE id= '$id'";
+        ($this->pdo)->exec($requete);;
+    }
+
+
+    // FONCTION : Récupération d'un secteur par son ID
+    public function getSecteurById($id) : Secteur{
+        $requete = "SELECT * FROM secteur WHERE id = '$id'";
+        $std = ($this->pdo)->query($requete);
+        $resultat = $std->fetchAll(PDO::FETCH_CLASS,"Secteur");
+
+        return $resultat[0];
+    }
+
+
+    // FONCTION : Suppression d'un secteur
+    function deleteSecteur(int $id) : string {
+        try{
+            $requete_1 = "DELETE FROM secteurs_structures WHERE id_secteur = $id";
+            ($this->pdo)->exec($requete_1);
+
+            $requete_2 = "DELETE FROM secteur WHERE id=$id";
+            ($this->pdo)->exec($requete_2);
+
+            return "CONFIRMATION : Le secteur a été suprimmé !";
+        }
+        catch (PDOException $exception){
+            return "Code error : " + $exception->getMessage();
         }
     }
+    /* ################# FIN : SECTEURS #################*/
+
+
+
+
+
+
+
+
+
+
+
+
     
     function insertSecteur( string $libelle){
         $req = "INSERT INTO secteur(libelle) VALUES ('$libelle')";
         ($this->pdo)->exec($req);
     }
 
-    function deleteSecteur(int $id) : string {
-        try{
-            $req1 = "DELETE FROM secteurs_structures WHERE id_secteur = $id";
-            ($this->pdo)->exec($req1);
-            $req = "DELETE FROM secteur WHERE id=$id";
-            ($this->pdo)->exec($req);
-            return "Supression bien effectuer";
-        }
-        catch (PDOException $exception){
-               return "Code error : " + $exception->getMessage();
-        }
-    }
-
-    function updateSecteur($id,$libelle){
-        $req = "UPDATE secteur SET libelle = '$libelle' WHERE id= '$id'";
-        ($this->pdo)->exec($req);;
-    }
 
     function getStructureById($id) : Structure{
         $req = "SELECT * FROM structure WHERE id = '$id'";//sélectonne un secteur correspond à l'identification id rentrer en paramètre
@@ -252,3 +268,5 @@ class DAO{
     }
 
 }
+
+?>

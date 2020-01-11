@@ -1,57 +1,54 @@
 <!doctype html>
 
 <html lang="fr">
+
     <head>
-        <link rel="stylesheet" href="../View/style.css">
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>Projet Gestion des Secteurs et Structures</title>
     </head>
 
     <body>
-
         <!-- Ajout du menu de navigation -->
         <?php include 'menu.php'; ?>
 
+        <!-- Contenu de la page -->
+        <div style="padding:50px;">
 
-        <div class="moove-right">
-            <div class="content">
-                <h1>Secteurs</h1>
-                <ul class="listItem">
-                    <?php
-                    foreach ($listeSecteurs as $secteur) { ?>
-                        <li class="item">
-                            <div class="secteurs">
-                                <?php if($secteur->LIBELLE != null){ echo $secteur->LIBELLE ;}   ?>
-                            </div>
+            <h1>Secteurs</h1>
 
-                            <form action="../Controler/update_secteurs.controler.php" method="post">
-                                <input type="number" name="idSecteur" hidden="hidden" value="<?php echo $secteur->ID ; ?>">
-                                <input class="update" type="submit" name="submitUpdate" value="Modifier">
-                            </form>
-                            <form action="../Controler/liste_secteurs.controler.php" method="post">
-                                <input type="number" name="idSecteur" hidden="hidden" value="<?php echo $secteur->ID ; ?>">
-                                <input class="delete" type="submit" name="submitDelete" value="Supprimer">
-                            </form>
+            <ul class="list-group">
 
-                        </li>
-                    <?php  } ?>
+            <?php foreach ($listeSecteurs as $secteur) { ?>
 
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <?php if($secteur->LIBELLE != null){ echo $secteur->LIBELLE;}   ?>
+                    </div>
 
-            </div>
-                <?php
-                    if(isset($error_message)){
-                        echo "<script> alert( \"$error_message \" )</script>";
-                    }
-                    if(isset($ok_message)){
-                        echo "<script> alert(\" $ok_message \")</script>";
+                    <form action="../Controler/update_secteurs.controler.php" method="post">
+                        <input type="number" name="IDSecteur" hidden="hidden" value="<?php echo $secteur->ID; ?>">
+                        <input class="btn btn-secondary" type="submit" name="submitUpdate" value="Modifier">
+                    </form>
 
-                    }
-                ?>
+                    <form action="../Controler/liste_secteurs.controler.php" method="post">
+                        <input name="IDSecteur" type="number" hidden="hidden" value="<?php echo $secteur->ID; ?>">
+                        <input class="btn btn-secondary" name="submitDelete" type="submit" value="Supprimer">
+                    </form>
+                </li>
+            <?php  } ?>
+            </ul>
+
+            <!-- Affichage des messages d'intéractions -->
+            <?php
+                if(isset($erreur_msg)){
+                    echo "<script> alert( \"$erreur_msg\" )</script>";
+                }
+                if(isset($confirmation_msg)){
+                    echo "<script> alert(\"$confirmation_msg\")</script>";
+                }
+            ?>
         </div>
-
     </body>
 
     <!-- Scripts Bootstrap -->
