@@ -1,6 +1,8 @@
 <?php
 
     class Structure{
+
+        // Déclaration des attributs
         private $ID;
         private $NOM;
         private $RUE;
@@ -10,7 +12,7 @@
         private $NB_DONATEURS;
         private $NB_ACTIONNAIRES;
 
-        public function __construct(array $tab = NULL){//nécessaire pour les test unitaire
+        public function __construct(array $tab = NULL){
             if($tab != NULL){
                 foreach ($tab as $key => $value) {
                     $this->$key = $value;

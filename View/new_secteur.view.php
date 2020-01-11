@@ -9,27 +9,33 @@
     </head>
 
     <body>
-    <!-- Ajout du menu de navigation -->
-    <?php include 'menu.php'; ?>
+        <!-- Ajout du menu de navigation -->
+        <?php include 'menu.php'; ?>
 
-    <!-- Contenu de la page -->
-    <div style="padding:50px;">
-        <form class="classic-form" method="post" action="../Controler/create_secteurs.controler.php">
-            <h2>Créer un secteur</h2>
+        <!-- Contenu de la page -->
+        <div style="padding:50px;">
 
-            <div>
-                <label for="libelle">Nom du secteur : </label>
-                <input  name="libelle" id="libelle" type="text">
-            </div>
+            <form method="post" action="../Controler/create_secteurs.controler.php">
 
-            <input name="submit" type="submit" required>
-            <?php if (isset($error_message)) {
-                echo '<div class="error_message">'. $error_message . '</div>';
-            } else if (isset($ok_message)) {
-                echo '<div class="ok_message">'. $ok_message .'</div>';
-            }?>
-        </form>
-    </div>
+                <h1>Créer un secteur</h1>
+
+                <div>
+                    <label for="libelle">Nom : </label>
+                    <input  name="libelle" id="libelle" type="text">
+                </div>
+
+                <input name="submit" class="btn btn-secondary" type="submit" required>
+
+                <!-- Affichage des messages d'intéractions -->
+                <?php
+                    if (isset($erreur_msg)) {
+                        echo '<div>'.$erreur_msg.'</div>';
+                    } else if (isset($confirmation_msg)) {
+                        echo '<div>'.$confirmation_msg.'</div>';
+                    }
+                ?>
+            </form>
+        </div>
 
     </body>
 

@@ -1,21 +1,22 @@
 <?php
 
-class Secteurs_structures{
+    class Secteurs_structures{
 
-    private $ID;
-    private $ID_STRUCTURE;
-    private $ID_SECTEUR;
+        // Déclaration des attributs
+        private $ID;
+        private $ID_STRUCTURE;
+        private $ID_SECTEUR;
 
-    public function __construct(array $tab = NULL){//nécessaire pour les test unitaire
-        if($tab != NULL){
-            foreach ($tab as $key => $value) {
-                $this->$key = $value;
+        public function __construct(array $tab = NULL){
+            if($tab != NULL){
+                foreach ($tab as $key => $value) {
+                    $this->$key = $value;
+                }
             }
         }
-    }
-    function __get(string $property){
-        return $this->$property;
-    }
+        function __get(string $property){
+            return $this->$property;
+        }
 }
 
 

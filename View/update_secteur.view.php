@@ -22,7 +22,7 @@
                     <input type="text" hidden="hidden" name="IDSecteur" value="<?php echo $_POST['IDSecteur'];?>">
 
                     <label for="libelle"><b>Nom du secteur : </b></label>
-                    <input  name="libelle" id="libelle" type="text" value="">
+                    <input  name="libelle" id="libelle" type="text" value="<?php if(isset($secteur)){echo $secteur->LIBELLE ;} ?>">
                 </div>
 
                 <input name="submit" class="btn btn-secondary" type="submit" required>

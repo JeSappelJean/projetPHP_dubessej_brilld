@@ -18,89 +18,71 @@
 
             <h1>Structures</h1>
 
-            <!-- Filtres -->
-            <div style="margin-bottom:25px;">
-                <form action="../Controler/liste_structures.controler.php" method="post">
-                    <div>
-                        <div>
-                            <label for="searchEntreprise">Entreprise</label>
-                            <input type="checkbox" id="searchEntreprise" name="searchEntreprise">
-                        </div>
-
-                        <div>
-                            <label for="searchAsso">Association</label>
-                            <input type="checkbox" id="searchAsso" name="searchAsso">
-                        </div>
-                    </div>
-
-
-                    <input id="submitFiltre" type="submit" class="btn btn-secondary" name="submitFiltre" value="Appliquer">
-                </form>
-            </div>
-
             <!-- Liste des structures -->
             <ul class="list-group">
-            <?php foreach ($listeAffichage as $elem) { ?>
+            <?php foreach ($listeAffichage as $structure) { ?>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
 
+                    <!-- Affichage du nom de la structure -->
                     <div>
                         <i class="fas fa-user"></i>
-                        <?php echo $elem[0]->NOM ?>
+                        <?php echo $structure[0]->NOM; ?>
                     </div>
 
+                    <!-- Affichage du secteur de la structure -->
                     <div>
                         <i class="fas fa-archway"></i>
-                        <?php if($elem[1]->LIBELLE != null)
-                        { echo $elem[1]->LIBELLE ;
-                        }  else {
-                            echo '<a class="btn btn-secondary" href="new_secteur.view.php">Créer un secteur.</a>';
-                        }  ?>
+                        <?php echo $structure[1]->LIBELLE ;?>
                     </div>
 
+                    <!-- Affichage de l'adresse de la structure -->
                     <div>
                         <i class="fas fa-home"></i>
-                        <?php echo $elem[0]->RUE.' '.$elem[0]->CP.' '.$elem[0]->VILLE ?>
+                        <?php echo $structure[0]->CP.', '.$structure[0]->RUE.' '.$structure[0]->VILLE; ?>
                     </div>
 
+                    <!-- Affichage du type de structure -->
                     <div>
                         <i class="fas fa-bookmark"></i>
-                        <?php if ($elem[0]->ESTASSO) {
+                        <?php if ($structure[0]->ESTASSO) {
                             echo 'Association';
                         } else {
                             echo 'Entreprise';
                         } ?>
                     </div>
 
+                    <!-- Affichage du nombre de donateurs/actionnaires -->
                     <div>
                         <i class="fas fa-list-ol"></i>
-                        <?php if ($elem[0]->ESTASSO) {
-                            echo 'Nombre de donateurs : '.$elem[0]->NB_DONATEURS;
+                        <?php if ($structure[0]->ESTASSO) {
+                            echo 'Nombre de donateurs: '.$structure[0]->NB_DONATEURS;
                         } else {
-                            echo 'Nombre d\'actionnaires : '.$elem[0]->NB_ACTIONNAIRES;
+                            echo 'Nombre d\'actionnaires: '.$structure[0]->NB_ACTIONNAIRES;
                         } ?>
                     </div>
 
+                    <!-- Affichage des boutons pour gérer les structures -->
                     <form action="../Controler/update_structure_controler.php" method="post">
-                        <input type="number" name="idStructure" hidden="hidden" value="<?php echo $elem[0]->ID ; ?>">
+                        <input type="number" name="IDStructure" hidden="hidden" value="<?php echo $structure[0]->ID; ?>">
                         <input class="btn btn-secondary" type="submit" name="submitUpdate" value="Modifier">
                     </form>
 
                     <form action="../Controler/liste_structures.controler.php" method="post">
-                        <input type="number" name="idStructure" hidden="hidden" value="<?php echo $elem[0]->ID ; ?>">
+                        <input type="number" name="IDStructure" hidden="hidden" value="<?php echo $structure[0]->ID; ?>">
                         <input class="btn btn-secondary" type="submit" name="submitDelete" value="Supprimer">
                     </form>
                 </li>
             <?php  } ?>
         </div>
 
+        <!-- Affichage des messages d'intéractions -->
         <?php
-        if(isset($error_message)){
-            echo "<script> alert( \"$error_message \" )</script>";
-        }
-        if(isset($ok_message)){
-            echo "<script> alert(\" $ok_message \")</script>";
-
-        }
+            if(isset($erreur_msg)){
+                echo "<script> alert( \"$erreur_msg \" )</script>";
+            }
+            if(isset($confirmation_msg)){
+                echo "<script> alert(\" $confirmation_msg \")</script>";
+            }
         ?>
     </body>
 

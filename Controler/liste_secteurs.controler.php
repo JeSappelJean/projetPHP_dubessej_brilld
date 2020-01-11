@@ -21,10 +21,10 @@ if (isset($_POST['submit'])) {
 if (isset($_POST['submitDelete'])){
     try{
         $dao->deleteSecteur(intval($_POST['IDSecteur']));
-        $confirmation_msg = "CONFIRMATION : Le secteur a été suprimmé !";
+        $confirmation_msg = "CONFIRMATION : Le secteur a été supprimé !";
     }
     catch (PDOException $exception){
-        $erreur_msg = "ERREUR : Echec de la supression !";
+        $erreur_msg = "ERREUR : Echec de la suppression !";
     }
 }
 

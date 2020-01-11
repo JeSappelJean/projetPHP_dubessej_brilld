@@ -1,13 +1,15 @@
 <?php
 
+// Appel des class utiles
 include_once("../Model/DAO.php");
 include_once("../Model/structure.php");
 
+// Initialisation des variables
 if(isset($_POST['submitUpdate'])){
-    $structure = $dao->getStructureById($_POST['idStructure']);
+    $structure = $dao->getStructureById($_POST['IDStructure']);
     $secteurs = $dao->getSecteurs();
-    $idSecteur = $dao->getSecteursStructuresByStructureID($_POST['idStructure'])->ID_SECTEUR;
+    $IDSecteur = $dao->getSecteursStructuresByStructureID($_POST['IDStructure'])->ID_SECTEUR;
 }
 
-
+// Redirection vers l'affichage
 include_once("../View/update_structure.view.php");

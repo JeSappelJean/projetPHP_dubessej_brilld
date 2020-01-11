@@ -1,74 +1,80 @@
 <?php
-    include_once ("../Model/DAO.php");
-    include_once ("../Model/structure.php");
+
+// Appel des class utiles
+include_once ("../Model/DAO.php");
+include_once ("../Model/structure.php");
 
 
-
+// CONTROLE : MAJ d'une structure
 if (isset($_POST['submit'])) {
-    if (isset($_POST['idStructure'])) {$id = $_POST['idStructure'];}
+
+    if (isset($_POST['IDStructure'])) {$id = $_POST['IDStructure'];}
     if (isset($_POST['libelle'])) {$libelle = $_POST['libelle'];}
     if (isset($_POST['rue'])) {$rue = $_POST['rue'];}
     if (isset($_POST['ville'])) {$ville = $_POST['ville'];}
     if (isset($_POST['cpostal'])) {$cpostal = $_POST['cpostal'];}
     if (isset($_POST['isAsso'])) {$isAsso = 1;} else {$isAsso = 0;}
     if (isset($_POST['nbMembre'])) {$nbMembre = (int)$_POST['nbMembre'];}
-    if (isset($_POST['secteurs'])){$idSecteur = (int)$_POST['secteurs'] ;}
-    if (isset($_POST['libelle']) && isset($_POST['rue']) && isset($_POST['ville']) && isset($_POST['cpostal'])  && isset($_POST['nbMembre'])) {
+    if (isset($_POST['secteurs'])){$IDSecteur = (int)$_POST['secteurs'] ;}
 
+    if (isset($_POST['libelle']) && isset($_POST['rue']) && isset($_POST['ville']) && isset($_POST['cpostal'])  && isset($_POST['nbMembre'])) {
         try{
             $dao->updateStructure($id, $libelle, $rue, $cpostal, $ville, $isAsso, $nbMembre);
-            $ok_message = "Votre structure à bien mise à jour";
+            $confirmation_msg = "CONFIRMATION : La structure a été mise à jour !";
         }
         catch (PDOException $exception){
-
-            $error_message = "Erreur lors de la mise à jour !";
+            $erreur_msg = "ERREUR : Echec de la mise à jour !";
         }
     }
 
-    if($idSecteur != -1){
+    if($IDSecteur != -1){
         $secteurStructure = $dao->getSecteursStructuresByStructureID($id);
-        if($secteurStructure->ID != null){
-            $dao->updateSecteurStructureByStructureID($id,$idSecteur);
-        }else{
-            $dao->insertSecteursStrutures($id,$idSecteur);
-        }
 
+        if($secteurStructure->ID != null){
+            $dao->updateSecteurStructureByStructureID($id,$IDSecteur);
+        }else{
+            $dao->insertSecteursStrutures($id,$IDSecteur);
+        }
     }
 }
 
+
+// CONTROLE : Suppression d'une structure
 if (isset($_POST['submitDelete'])){
     try{
-        $dao->deleteStructure(intval($_POST['idStructure']));
-        $ok_message = "Votre structure à bien été suprimmé";
+        $dao->deleteStructure(intval($_POST['IDStructure']));
+        $confirmation_msg = "CONFIRMATION : La structure a bien été supprimée";
     }
     catch (PDOException $exception){
-
-        $error_message = "Erreur lors de la supression !";
+        $erreur_msg = "ERREUR : Echec de la supression !";
     }
 }
 
-if (isset($_POST['submitFiltre'])) {
-    if (isset($_POST['searchAsso']) && isset($_POST['searchEntreprise'])) {
-        $listStructures = $dao->getStructures();
 
+// Récupération de la liste des structures
+$listeStructures = $dao->getStructures();
 
-    } elseif (isset($_POST['searchEntreprise'])) {
-        $listStructures = $dao->getStructureByType(0);
-
-    } elseif (isset($_POST['searchAsso'])) {
-        $listStructures = $dao->getStructureByType(1);
-
-    }
-} else {
-    $listStructures = $dao->getStructures();
-}
+// Création d'une variable pour l'affichage
 $listeAffichage = [];
-foreach ($listStructures as $structure){
-    $element = [];
+
+foreach ($listeStructures as $structure){
+
+    // Création d'une structure avec son secteur pour affichage
+    $structureAffichage = [];
+
+    // Récupération du secteur
     $secteurID = $dao->getSecteursStructuresByStructureID($structure->ID);
     $secteur  = $dao->getSecteurById($secteurID->ID_SECTEUR);
-    array_push($element,$structure);
-    array_push($element,$secteur);
-    array_push($listeAffichage,$element);
+
+    // Remplissage de la structure et de son secteur
+    array_push($structureAffichage,$structure);
+    array_push($structureAffichage,$secteur);
+
+    // Ajout dans la liste d'affichage des structures et des secteurs correspondant
+    array_push($listeAffichage,$structureAffichage);
 }
-    include_once("../View/liste_structure.view.php");
+
+// Redirection vers l'affichage
+include_once("../View/liste_structure.view.php");
+
+?>
