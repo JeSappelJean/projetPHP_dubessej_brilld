@@ -1,8 +1,8 @@
 <?php
 
 // Appel des class utiles
-include_once ("../Model/DAO.php");
-include_once ("../Model/structure.php");
+include_once("../Model/DAO.php");
+include_once("../Model/structure.php");
 
 // Récupération de tous les secteurs
 $secteurs = $dao->getSecteurs();
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
 }
 
 // Redirection vers l'affichage
-include_once ("../View/new_structure.view.php");
+include_once("../View/addStructure.view.php");
 
 
 

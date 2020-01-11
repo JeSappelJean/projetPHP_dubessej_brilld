@@ -18,7 +18,7 @@
 
             <h1>Modifier votre structure</h1>
 
-            <form method="post" action="../Controler/liste_structures.controler.php">
+            <form method="post" action="../Controler/listeStructures.controler.php">
 
                 <input type="text" hidden="hidden" name="IDStructure" value="<?php echo $_POST['IDStructure'];?>">
 

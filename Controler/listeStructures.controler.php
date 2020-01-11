@@ -75,6 +75,6 @@ foreach ($listeStructures as $structure){
 }
 
 // Redirection vers l'affichage
-include_once("../View/liste_structure.view.php");
+include_once("../View/listeStructure.view.php");
 
 ?>

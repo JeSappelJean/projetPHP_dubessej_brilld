@@ -1,7 +1,7 @@
 <?php
 
 // Appel des class utiles
-include_once ("../Model/DAO.php");
+include_once("../Model/DAO.php");
 
 // CONTROLE : MAJ d'un secteur
 if (isset($_POST['submit'])) {
@@ -32,6 +32,6 @@ if (isset($_POST['submitDelete'])){
 $listeSecteurs = $dao->getSecteurs();
 
 // Redirection vers l'affichage
-include_once("../View/liste_secteurs.view.php");
+include_once("../View/listeSecteurs.view.php");
 
 ?>

@@ -62,12 +62,12 @@
                     </div>
 
                     <!-- Affichage des boutons pour gérer les structures -->
-                    <form action="../Controler/update_structure_controler.php" method="post">
+                    <form action="../Controler/updateStructure.controler.php" method="post">
                         <input type="number" name="IDStructure" hidden="hidden" value="<?php echo $structure[0]->ID; ?>">
                         <input class="btn btn-secondary" type="submit" name="submitUpdate" value="Modifier">
                     </form>
 
-                    <form action="../Controler/liste_structures.controler.php" method="post">
+                    <form action="../Controler/listeStructures.controler.php" method="post">
                         <input type="number" name="IDStructure" hidden="hidden" value="<?php echo $structure[0]->ID; ?>">
                         <input class="btn btn-secondary" type="submit" name="submitDelete" value="Supprimer">
                     </form>

@@ -10,4 +10,4 @@ if(isset($_POST['submitUpdate'])){
 }
 
 // Redirection vers l'affichage
-include_once("../View/update_secteur.view.php");
+include_once("../View/updateSecteur.view.php");

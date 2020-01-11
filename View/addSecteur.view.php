@@ -15,7 +15,7 @@
         <!-- Contenu de la page -->
         <div style="padding:50px;">
 
-            <form method="post" action="../Controler/create_secteurs.controler.php">
+            <form method="post" action="../Controler/addSecteurs.controler.php">
 
                 <h1>Créer un secteur</h1>
 

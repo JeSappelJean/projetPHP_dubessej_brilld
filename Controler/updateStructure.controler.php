@@ -12,4 +12,4 @@ if(isset($_POST['submitUpdate'])){
 }
 
 // Redirection vers l'affichage
-include_once("../View/update_structure.view.php");
+include_once("../View/updateStructure.view.php");

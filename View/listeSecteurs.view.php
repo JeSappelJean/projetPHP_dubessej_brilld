@@ -26,12 +26,12 @@
                         <?php if($secteur->LIBELLE != null){ echo $secteur->LIBELLE;}   ?>
                     </div>
 
-                    <form action="../Controler/update_secteurs.controler.php" method="post">
+                    <form action="../Controler/updateSecteurs.controler.php" method="post">
                         <input type="number" name="IDSecteur" hidden="hidden" value="<?php echo $secteur->ID; ?>">
                         <input class="btn btn-secondary" type="submit" name="submitUpdate" value="Modifier">
                     </form>
 
-                    <form action="../Controler/liste_secteurs.controler.php" method="post">
+                    <form action="../Controler/listeSecteurs.controler.php" method="post">
                         <input name="IDSecteur" type="number" hidden="hidden" value="<?php echo $secteur->ID; ?>">
                         <input class="btn btn-secondary" name="submitDelete" type="submit" value="Supprimer">
                     </form>

@@ -20,4 +20,4 @@ if (isset($_POST['submit'])) {
 }
 
 // Redirection vers l'affichage
-include_once ("../View/new_secteur.view.php");
+include_once("../View/addSecteur.view.php");

@@ -14,7 +14,7 @@
 
         <!-- Contenu de la page -->
         <div style="padding:50px;">
-            <form method="post" action="../Controler/create_structure.conrtoler.php">
+            <form method="post" action="../Controler/addStructure.controler.php">
 
                 <h1>Créer une structure</h1>
 
@@ -39,7 +39,7 @@
                 <!-- Affichage saisie du CP de structure -->
                 <div>
                     <label for="cpostal"><b>Code Postal : </b></label>
-                    <input name="cpostal" id="cpostal" type="text">
+                    <input name="cpostal" id="cpostal" type="number">
                 </div>
 
                 <!-- Affichage saisie du type de structure -->

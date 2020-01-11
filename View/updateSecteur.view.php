@@ -14,7 +14,7 @@
 
         <!-- Contenu de la page -->
         <div style="padding:50px;">
-            <form method="post" action="../Controler/liste_secteurs.controler.php">
+            <form method="post" action="../Controler/listeSecteurs.controler.php">
 
                <h1>Mettre à jour le secteur</h1>
 
