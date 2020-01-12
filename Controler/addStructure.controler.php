@@ -19,13 +19,13 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['secteurs'])){$idSecteur = (int)$_POST['secteurs'] ;}
     if (isset($_POST['libelle']) && isset($_POST['rue']) && isset($_POST['ville']) && isset($_POST['cpostal'])  && isset($_POST['nbMembre'])) {
 
-    try{
-        $dao->insertStructure($libelle, $rue, $cpostal, $ville, $isAsso, $nbMembre);
-        $confirmation_msg = "CONFIRMATION : La structure a bien été créée !";
-    }
-    catch (PDOException $PDOException){
-        $erreur_msg = "ECHEC : La structure existe déjà !";
-    }
+        try{
+            $dao->insertStructure($libelle, $rue, $cpostal, $ville, $isAsso, $nbMembre);
+            $confirmation_msg = "CONFIRMATION : La structure a bien été créée !";
+        }
+        catch (PDOException $PDOException){
+            $erreur_msg = "ECHEC : La structure existe déjà !";
+        }
     }
 
     // On ajoute aussi la liaison Secteurs et Structures
