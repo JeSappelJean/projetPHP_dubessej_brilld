@@ -167,8 +167,8 @@ class DAO{
     /* ################# SERVEURSSTRUCTURES #################*/
     // FONCTION : Insertion dans SecteursStructures
     function insertSecteursStructures($id_structure,$id_secteurs){
-        $req = "INSERT INTO secteurs_structures(id_structure,id_secteur) VALUES ('$id_structure','$id_secteurs')";
-        ($this->pdo)->exec($req);
+        $requete = "INSERT INTO secteurs_structures(id_structure,id_secteur) VALUES ('$id_structure','$id_secteurs')";
+        ($this->pdo)->exec($requete);
     }
 
 
