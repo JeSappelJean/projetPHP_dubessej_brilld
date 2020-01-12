@@ -33,40 +33,39 @@ class DAO{
     /* ################# SECTEURS #################*/
     // FONCTION : Récupération de tous les secteurs
     public function getSecteurs() : array{
+        $req = "SELECT * FROM secteur" ;
+        $statement = $this->pdo->query($req);
+        $result = $statement->fetchAll(PDO::FETCH_CLASS,"Secteur");
 
-        $requete = "SELECT * FROM secteur" ;
-        $std = ($this->pdo)->query($requete);
-        $resultat = $std->fetchAll(PDO::FETCH_CLASS,"Secteur");
-
-        return $resultat;
+        return $result;
     }
 
 
     // FONCTION : MAJ d'un secteur
-    function updateSecteur($id,$libelle){
-        $requete = "UPDATE secteur SET libelle = '$libelle' WHERE id= '$id'";
-        ($this->pdo)->exec($requete);;
+    function updateSecteur($id, $libelle){
+        $req = "UPDATE secteur SET libelle = '$libelle' WHERE id= '$id'";
+        $this->pdo->exec($req);
     }
 
 
     // FONCTION : Récupération d'un secteur par son ID
     public function getSecteurById($id) : Secteur{
-        $requete = "SELECT * FROM secteur WHERE id = '$id'";
-        $std = ($this->pdo)->query($requete);
-        $resultat = $std->fetchAll(PDO::FETCH_CLASS,"Secteur");
+        $req = "SELECT * FROM secteur WHERE id = '$id'";
+        $statement = $this->pdo->query($req);
+        $result = $statement->fetchAll(PDO::FETCH_CLASS,"Secteur");
 
-        return $resultat[0];
+        return $result[0];
     }
 
 
     // FONCTION : Suppression d'un secteur
     function deleteSecteur(int $id) : string {
         try{
-            $requete_1 = "DELETE FROM secteurs_structures WHERE id_secteur = $id";
-            ($this->pdo)->exec($requete_1);
+            $req1 = "DELETE FROM secteurs_structures WHERE id_secteur = $id";
+            $this->pdo->exec($req1);
 
-            $requete_2 = "DELETE FROM secteur WHERE id=$id";
-            ($this->pdo)->exec($requete_2);
+            $req2 = "DELETE FROM secteur WHERE id=$id";
+            $this->pdo->exec($req2);
 
             return "CONFIRMATION : Le secteur a été suprimmé !";
         }
@@ -78,7 +77,7 @@ class DAO{
     // FONCTION : Insertion d'un secteur
     function insertSecteur( string $libelle){
         $req = "INSERT INTO secteur(libelle) VALUES ('$libelle')";
-        ($this->pdo)->exec($req);
+        $this->pdo->exec($req);
     }
     /* ################# FIN : SECTEURS #################*/
 
@@ -87,72 +86,68 @@ class DAO{
     /* ################# STRUCTURES #################*/
     // FONCTION : Récupération de toute les structures
     function getStructures() : array{
+        $req = "SELECT * FROM structure" ;
+        $statement = $this->pdo->query($req);
+        $result = $statement->fetchAll(PDO::FETCH_CLASS,"Structure");
 
-        $requete = "SELECT * FROM structure" ;
-        $std = ($this->pdo)->query($requete);
-        $resultat = $std->fetchAll(PDO::FETCH_CLASS,"Structure");
-
-        return $resultat;
+        return $result;
     }
 
 
     // FONCTION : MAJ d'une structure
     function updateStructure($id,$nom,$rue,$cp,$ville,$estasso,$nb){
-
         if($estasso == 1){
-            $requete = "UPDATE structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_donnateurs='$nb' WHERE id='$id' ";
+            $req = "UPDATE structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_donnateurs='$nb' WHERE id='$id' ";
         }
         else{
-            $requete = "UPDATE structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_actionnaires='$nb' WHERE id='$id' ";
+            $req = "UPDATE structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_actionnaires='$nb' WHERE id='$id' ";
         }
 
-        ($this->pdo)->exec($requete);;
+        $this->pdo->exec($req);;
     }
 
 
     // FONCTION : Récupération d'une structure par son id
     function getStructureById($id) : Structure{
+        $req = "SELECT * FROM structure WHERE id = '$id'";
 
-        $requete = "SELECT * FROM structure WHERE id = '$id'";
-
-        $std =($this->pdo)->query($requete);
-        $resultat =$std->fetchAll(PDO::FETCH_CLASS,'Structure');
-        return $resultat[0];
+        $statement = $this->pdo->query($req);
+        $result = $statement->fetchAll(PDO::FETCH_CLASS,'Structure');
+        return $result[0];
     }
 
 
     // FONCTION : Insertion d'une structure
     function insertStructure($nom,$rue,$cp,$ville,$estasso,$nb){
         if($estasso == 1){
-            $requete = "INSERT INTO structure(nom,rue,cp,ville,estasso,nb_donateurs) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
+            $req = "INSERT INTO structure(nom,rue,cp,ville,estasso,nb_donateurs) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
         }
         else{
-            $requete = "INSERT INTO structure(nom,rue,cp,ville,estasso,nb_actionnaires) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
+            $req = "INSERT INTO structure(nom,rue,cp,ville,estasso,nb_actionnaires) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
         }
-        ($this->pdo)->exec($requete);;
+        $this->pdo->exec($req);
 
     }
 
 
     // FONCTION : Récupération d'une structure par son libelle
     function getStructureByLibelle($libelle) : Structure{
+        $req = "SELECT * FROM structure WHERE nom = '$libelle'";
 
-        $requete = "SELECT * FROM structure WHERE nom = '$libelle'";
-
-        $std =($this->pdo)->query($requete);
-        $resultat =$std->fetchAll(PDO::FETCH_CLASS,'Structure');
-        return $resultat[0];
+        $statement = $this->pdo->query($req);
+        $result = $statement->fetchAll(PDO::FETCH_CLASS,'Structure');
+        return $result[0];
     }
 
 
     // FONCTION : Suppression d'une structure
     function deleteStructure(int $id) : string {
         try{
-            $requete_1 = "DELETE FROM secteurs_structures WHERE id_structure = $id";
-            ($this->pdo)->exec($requete_1);
+            $req1 = "DELETE FROM secteurs_structures WHERE id_structure = $id";
+            $this->pdo->exec($req1);
 
-            $requete_2 = "DELETE FROM structure WHERE id=$id";
-            ($this->pdo)->exec($requete_2);
+            $req2 = "DELETE FROM structure WHERE id=$id";
+            $this->pdo->exec($req2);
 
             return "CONFIRMATION :  La structure a été supprimée";
         }
@@ -168,24 +163,24 @@ class DAO{
     // FONCTION : Insertion dans SecteursStructures
     function insertSecteursStructures($id_structure,$id_secteurs){
         $req = "INSERT INTO secteurs_structures(id_structure,id_secteur) VALUES ('$id_structure','$id_secteurs')";
-        ($this->pdo)->exec($req);
+        $this->pdo->exec($req);
     }
 
 
     // FONCTION : Récupération des infos SecteursStructures via l'id d'une structure
     function getSecteursStructuresByStructureID($id) : Secteurs_structures{
 
-        $requete = "SELECT * FROM secteurs_structures WHERE id_structure = '$id'";
-        $std =($this->pdo)->query($requete);
-        $resultat =$std->fetchAll(PDO::FETCH_CLASS,'Secteurs_structures');
+        $req = "SELECT * FROM secteurs_structures WHERE id_structure = '$id'";
+        $statement =$this->pdo->query($req);
+        $result =$statement->fetchAll(PDO::FETCH_CLASS,'Secteurs_structures');
 
-        return $resultat[0];
+        return $result[0];
     }
 
     // FONCTION : MAJ des infos SecteursStructures via l'id d'une structure
     function updateSecteurStructureByStructureID($idStructure,$idSecteur){
-        $requete = "UPDATE secteurs_structures SET id_secteur='$idSecteur' where id_structure='$idStructure'  ";
-        ($this->pdo)->exec($requete);;
+        $req = "UPDATE secteurs_structures SET id_secteur='$idSecteur' where id_structure='$idStructure'  ";
+        $this->pdo->exec($req);
     }
     /* ################# FIN : SERVEURSSTRUCTURES #################*/
 }
