@@ -59,7 +59,6 @@
                     <label for="secteur"><b>Secteur : </b></label>
 
                     <select name="secteurs">
-                        <option value="-1">Choisir un secteur</option>
                         <?php foreach ($secteurs as $secteur){  ?>
                         <option value="<?php echo $secteur->ID ?>"><?php echo $secteur->LIBELLE?></option>
                         <?php }?>
