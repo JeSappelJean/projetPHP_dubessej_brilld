@@ -100,10 +100,10 @@ class DAO{
     function updateStructure($id,$nom,$rue,$cp,$ville,$estasso,$nb){
 
         if($estasso == 1){
-            $requete = "UPDATE Structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_donnateurs='$nb' WHERE id='$id' ";
+            $requete = "UPDATE structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_donnateurs='$nb' WHERE id='$id' ";
         }
         else{
-            $requete = "UPDATE Structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_actionnaires='$nb' WHERE id='$id' ";
+            $requete = "UPDATE structure SET nom='$nom' , rue='$rue',cp='$cp', ville='$ville' , estasso='$estasso' , nb_actionnaires='$nb' WHERE id='$id' ";
         }
 
         ($this->pdo)->exec($requete);;
@@ -124,10 +124,10 @@ class DAO{
     // FONCTION : Insertion d'une structure
     function insertStructure($nom,$rue,$cp,$ville,$estasso,$nb){
         if($estasso == 1){
-            $requete = "INSERT INTO Structure(nom,rue,cp,ville,estasso,nb_donateurs) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
+            $requete = "INSERT INTO structure(nom,rue,cp,ville,estasso,nb_donateurs) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
         }
         else{
-            $requete = "INSERT INTO Structure(nom,rue,cp,ville,estasso,nb_actionnaires) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
+            $requete = "INSERT INTO structure(nom,rue,cp,ville,estasso,nb_actionnaires) VALUES ('$nom','$rue','$cp','$ville','$estasso','$nb')";
         }
         ($this->pdo)->exec($requete);;
 
