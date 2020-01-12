@@ -181,6 +181,12 @@ class DAO{
 
         return $resultat[0];
     }
+
+    // FONCTION : MAJ des infos SecteursStructures via l'id d'une structure
+    function updateSecteurStructureByStructureID($idStructure,$idSecteur){
+        $requete = "UPDATE secteurs_structures SET id_secteur='$idSecteur' where id_structure='$idStructure'  ";
+        ($this->pdo)->exec($requete);;
+    }
     /* ################# FIN : SERVEURSSTRUCTURES #################*/
 }
 
